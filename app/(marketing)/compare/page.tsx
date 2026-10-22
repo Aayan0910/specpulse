@@ -1,24 +1,79 @@
+"use client";
+
+import { useState } from "react";
+
 export default function ComparePage() {
+  const [tab, setTab] = useState<"gpu" | "cpu">("gpu");
+
   const gpus = [
     {
       name: "NVIDIA GeForce RTX 4070 Super",
       vram: "12GB GDDR6X",
       tdp: "220W",
-      launchPrice: "₹63,000",
-      currentPrice: "₹58,999",
-      gaming1080p: "240+ FPS",
-      gaming1440p: "140+ FPS",
-      rayTracing: "Excellent",
+      currentPrice: "₹64,999",
+      retailer: "MDComputers",
+      gaming1080p: "240+ FPS (Ultra)",
+      gaming1440p: "142+ FPS (Ultra)",
+      rayTracing: "Excellent (DLSS 3.5)",
+      bus: "192-bit",
+      recommendedPsu: "650W",
     },
     {
       name: "AMD Radeon RX 7800 XT",
       vram: "16GB GDDR6",
       tdp: "263W",
-      launchPrice: "₹54,000",
       currentPrice: "₹51,499",
-      gaming1080p: "250+ FPS",
-      gaming1440p: "145+ FPS",
-      rayTracing: "Good",
+      retailer: "PrimeABGB",
+      gaming1080p: "255+ FPS (Ultra)",
+      gaming1440p: "148+ FPS (Ultra)",
+      rayTracing: "Good (FSR 3)",
+      bus: "256-bit",
+      recommendedPsu: "700W",
+    },
+    {
+      name: "NVIDIA GeForce RTX 4060",
+      vram: "8GB GDDR6",
+      tdp: "115W",
+      currentPrice: "₹29,999",
+      retailer: "Flipkart",
+      gaming1080p: "160+ FPS (Ultra)",
+      gaming1440p: "85+ FPS (High)",
+      rayTracing: "Moderate",
+      bus: "128-bit",
+      recommendedPsu: "500W",
+    },
+  ];
+
+  const cpus = [
+    {
+      name: "AMD Ryzen 7 7800X3D",
+      cores: "8 Cores / 16 Threads",
+      socket: "AM5",
+      currentPrice: "₹37,999",
+      retailer: "PrimeABGB",
+      gamingPerf: "Crown King (Best Gaming CPU)",
+      tdp: "120W",
+      ramSupport: "DDR5-5200+",
+    },
+    {
+      name: "Intel Core i5-14600K",
+      cores: "14 Cores (6P + 8E)",
+      socket: "LGA1700",
+      currentPrice: "₹27,499",
+      retailer: "MDComputers",
+      gamingPerf: "Outstanding Value & Productivity",
+      tdp: "181W (Max Turbo)",
+      ramSupport: "DDR5 / DDR4",
+    },
+    {
+      name: "AMD Ryzen 5 7600X",
+      cores: "6 Cores / 12 Threads",
+      socket: "AM5",
+      currentPrice: "₹20,999",
+      retailer: "Vedant Computers",
+      gamingPerf: "Exceptional Entry AM5 Gaming",
+      tdp: "105W",
+      ramSupport: "DDR5-5200+",
     },
   ];
 
@@ -26,59 +81,133 @@ export default function ComparePage() {
     <div className="container mx-auto px-4 py-8 space-y-8">
       <div>
         <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">GPU & CPU Benchmark Comparison Matrix</h1>
-        <p className="text-slate-500 text-sm">Compare technical specifications, VRAM, power draw, and real gaming performance in INR.</p>
+        <p className="text-slate-600 text-sm mt-1">Compare technical specifications, VRAM, power draw, and real gaming performance in INR across Indian stores.</p>
+      </div>
+
+      <div className="flex gap-3">
+        <button
+          onClick={() => setTab("gpu")}
+          className={`px-6 py-2.5 rounded-xl font-bold text-xs transition-all ${
+            tab === "gpu" ? "bg-blue-600 text-white shadow-md" : "bg-white text-slate-700 border hover:bg-slate-50"
+          }`}
+        >
+          🎮 Graphics Cards (GPU)
+        </button>
+        <button
+          onClick={() => setTab("cpu")}
+          className={`px-6 py-2.5 rounded-xl font-bold text-xs transition-all ${
+            tab === "cpu" ? "bg-blue-600 text-white shadow-md" : "bg-white text-slate-700 border hover:bg-slate-50"
+          }`}
+        >
+          ⚡ Processors (CPU)
+        </button>
       </div>
 
       <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse text-xs">
-            <thead>
-              <tr className="bg-slate-50 border-b border-slate-200 text-slate-700">
-                <th className="p-4 font-bold">Specification</th>
-                {gpus.map((gpu, i) => (
-                  <th key={i} className="p-4 font-bold text-slate-900 text-sm">{gpu.name}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              <tr>
-                <td className="p-4 font-semibold text-slate-600">Current Lowest Price</td>
-                {gpus.map((gpu, i) => (
-                  <td key={i} className="p-4 font-extrabold text-blue-600 text-sm">{gpu.currentPrice}</td>
-                ))}
-              </tr>
-              <tr>
-                <td className="p-4 font-semibold text-slate-600">VRAM / Memory</td>
-                {gpus.map((gpu, i) => (
-                  <td key={i} className="p-4 text-slate-900 font-medium">{gpu.vram}</td>
-                ))}
-              </tr>
-              <tr>
-                <td className="p-4 font-semibold text-slate-600">TDP (Power Draw)</td>
-                {gpus.map((gpu, i) => (
-                  <td key={i} className="p-4 text-slate-900">{gpu.tdp}</td>
-                ))}
-              </tr>
-              <tr>
-                <td className="p-4 font-semibold text-slate-600">1080p Ultra Gaming</td>
-                {gpus.map((gpu, i) => (
-                  <td key={i} className="p-4 text-slate-900 font-medium">{gpu.gaming1080p}</td>
-                ))}
-              </tr>
-              <tr>
-                <td className="p-4 font-semibold text-slate-600">1440p Ultra Gaming</td>
-                {gpus.map((gpu, i) => (
-                  <td key={i} className="p-4 text-slate-900 font-medium">{gpu.gaming1440p}</td>
-                ))}
-              </tr>
-              <tr>
-                <td className="p-4 font-semibold text-slate-600">Ray Tracing Performance</td>
-                {gpus.map((gpu, i) => (
-                  <td key={i} className="p-4 text-slate-900 font-medium">{gpu.rayTracing}</td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
+          {tab === "gpu" ? (
+            <table className="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr className="bg-slate-50 border-b border-slate-200 text-slate-700">
+                  <th className="p-4 font-bold">Specification</th>
+                  {gpus.map((gpu, i) => (
+                    <th key={i} className="p-4 font-bold text-slate-900 text-sm">{gpu.name}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                <tr>
+                  <td className="p-4 font-semibold text-slate-600">Current Lowest Price</td>
+                  {gpus.map((gpu, i) => (
+                    <td key={i} className="p-4 font-extrabold text-blue-600 text-sm">
+                      {gpu.currentPrice} <span className="text-[10px] text-slate-400 font-normal">({gpu.retailer})</span>
+                    </td>
+                  ))}
+                </tr>
+                <tr>
+                  <td className="p-4 font-semibold text-slate-600">VRAM / Memory Bus</td>
+                  {gpus.map((gpu, i) => (
+                    <td key={i} className="p-4 text-slate-900 font-medium">{gpu.vram} ({gpu.bus})</td>
+                  ))}
+                </tr>
+                <tr>
+                  <td className="p-4 font-semibold text-slate-600">TDP (Power Draw)</td>
+                  {gpus.map((gpu, i) => (
+                    <td key={i} className="p-4 text-slate-900">{gpu.tdp} (Rec. {gpu.recommendedPsu})</td>
+                  ))}
+                </tr>
+                <tr>
+                  <td className="p-4 font-semibold text-slate-600">1080p Ultra Gaming</td>
+                  {gpus.map((gpu, i) => (
+                    <td key={i} className="p-4 text-slate-900 font-medium">{gpu.gaming1080p}</td>
+                  ))}
+                </tr>
+                <tr>
+                  <td className="p-4 font-semibold text-slate-600">1440p Ultra Gaming</td>
+                  {gpus.map((gpu, i) => (
+                    <td key={i} className="p-4 text-slate-900 font-medium">{gpu.gaming1440p}</td>
+                  ))}
+                </tr>
+                <tr>
+                  <td className="p-4 font-semibold text-slate-600">Ray Tracing Performance</td>
+                  {gpus.map((gpu, i) => (
+                    <td key={i} className="p-4 text-slate-900 font-medium">{gpu.rayTracing}</td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+          ) : (
+            <table className="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr className="bg-slate-50 border-b border-slate-200 text-slate-700">
+                  <th className="p-4 font-bold">Specification</th>
+                  {cpus.map((cpu, i) => (
+                    <th key={i} className="p-4 font-bold text-slate-900 text-sm">{cpu.name}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                <tr>
+                  <td className="p-4 font-semibold text-slate-600">Current Lowest Price</td>
+                  {cpus.map((cpu, i) => (
+                    <td key={i} className="p-4 font-extrabold text-blue-600 text-sm">
+                      {cpu.currentPrice} <span className="text-[10px] text-slate-400 font-normal">({cpu.retailer})</span>
+                    </td>
+                  ))}
+                </tr>
+                <tr>
+                  <td className="p-4 font-semibold text-slate-600">Cores / Threads</td>
+                  {cpus.map((cpu, i) => (
+                    <td key={i} className="p-4 text-slate-900 font-medium">{cpu.cores}</td>
+                  ))}
+                </tr>
+                <tr>
+                  <td className="p-4 font-semibold text-slate-600">Socket Type</td>
+                  {cpus.map((cpu, i) => (
+                    <td key={i} className="p-4 text-slate-900">{cpu.socket}</td>
+                  ))}
+                </tr>
+                <tr>
+                  <td className="p-4 font-semibold text-slate-600">RAM Support</td>
+                  {cpus.map((cpu, i) => (
+                    <td key={i} className="p-4 text-slate-900">{cpu.ramSupport}</td>
+                  ))}
+                </tr>
+                <tr>
+                  <td className="p-4 font-semibold text-slate-600">Thermal Design Power (TDP)</td>
+                  {cpus.map((cpu, i) => (
+                    <td key={i} className="p-4 text-slate-900">{cpu.tdp}</td>
+                  ))}
+                </tr>
+                <tr>
+                  <td className="p-4 font-semibold text-slate-600">Gaming Benchmark Standing</td>
+                  {cpus.map((cpu, i) => (
+                    <td key={i} className="p-4 text-emerald-700 font-bold">{cpu.gamingPerf}</td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </div>

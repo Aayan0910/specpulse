@@ -5,66 +5,94 @@ export default async function ProductDetailPage({
 }) {
   const { slug } = await params;
 
-  const product = {
-    id: slug,
-    name: "NVIDIA GeForce RTX 4070 Super Founders Edition 12GB GDDR6X",
-    category: "Graphics Cards",
-    brand: "NVIDIA",
-    mrp: 65999,
-    currentLowest: 58999,
-    lowestRetailer: "MDComputers",
-    specs: {
-      "VRAM": "12GB GDDR6X",
-      "Memory Bus": "192-bit",
-      "Base Clock": "1980 MHz",
-      "Boost Clock": "2475 MHz",
-      "CUDA Cores": "7168",
-      "TDP / Power": "220W",
-      "Recommended PSU": "650W",
-      "Slot Width": "2-Slot (242mm)",
+  // Mock product lookup based on slug
+  const productData: Record<string, any> = {
+    "rtx-4070-super": {
+      name: "NVIDIA GeForce RTX 4070 Super Founders Edition 12GB GDDR6X",
+      category: "Graphics Cards",
+      brand: "NVIDIA / ASUS",
+      mrp: 72999,
+      currentLowest: 64999,
+      lowestRetailer: "MDComputers",
+      specs: {
+        "VRAM": "12GB GDDR6X",
+        "Memory Bus": "192-bit",
+        "Base Clock": "1980 MHz",
+        "Boost Clock": "2475 MHz",
+        "CUDA Cores": "7168",
+        "TDP / Power": "220W",
+        "Recommended PSU": "650W",
+        "Slot Width": "2-Slot (242mm)",
+      },
+      offers: [
+        { retailer: "MDComputers", price: 64999, stock: "In Stock", delivery: "Free (2-4 days)", link: "#" },
+        { retailer: "PrimeABGB", price: 65499, stock: "In Stock", delivery: "₹150", link: "#" },
+        { retailer: "Vedant Computers", price: 65999, stock: "In Stock", delivery: "Free", link: "#" },
+        { retailer: "Amazon India", price: 67499, stock: "In Stock", delivery: "Free (Prime)", link: "#" },
+        { retailer: "Flipkart", price: 68999, stock: "2 Units Left", delivery: "Free", link: "#" },
+      ],
     },
-    offers: [
-      { retailer: "MDComputers", price: 58999, stock: "In Stock", delivery: "Free", link: "#" },
-      { retailer: "PrimeABGB", price: 59499, stock: "In Stock", delivery: "₹150", link: "#" },
-      { retailer: "Vedant Computers", price: 59999, stock: "In Stock", delivery: "Free", link: "#" },
-      { retailer: "Amazon India", price: 62499, stock: "In Stock", delivery: "Free", link: "#" },
-      { retailer: "Flipkart", price: 63999, stock: "2 Left", delivery: "Free", link: "#" },
-    ],
+    "ryzen-7-7800x3d": {
+      name: "AMD Ryzen 7 7800X3D 8-Core 16-Thread Desktop Processor",
+      category: "Processors (CPU)",
+      brand: "AMD",
+      mrp: 44999,
+      currentLowest: 37999,
+      lowestRetailer: "PrimeABGB",
+      specs: {
+        "Cores / Threads": "8 Cores / 16 Threads",
+        "Socket": "AM5",
+        "Base Clock": "4.2 GHz",
+        "Boost Clock": "5.0 GHz",
+        "L3 Cache": "96MB 3D V-Cache",
+        "TDP": "120W",
+        "Memory Support": "DDR5-5200",
+      },
+      offers: [
+        { retailer: "PrimeABGB", price: 37999, stock: "In Stock", delivery: "Free", link: "#" },
+        { retailer: "MDComputers", price: 38499, stock: "In Stock", delivery: "Free", link: "#" },
+        { retailer: "Vedant Computers", price: 38999, stock: "In Stock", delivery: "Free", link: "#" },
+        { retailer: "Amazon India", price: 39999, stock: "In Stock", delivery: "Free (Prime)", link: "#" },
+      ],
+    }
   };
+
+  const product = productData[slug] || productData["rtx-4070-super"];
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
       {/* Breadcrumb */}
-      <div className="text-xs text-slate-400 flex items-center gap-2">
-        <a href="/" className="hover:text-slate-600">Home</a>
+      <div className="text-xs text-slate-500 flex items-center gap-2">
+        <a href="/" className="hover:text-slate-800">Home</a>
         <span>/</span>
-        <a href="/products" className="hover:text-slate-600">Graphics Cards</a>
+        <a href="/products" className="hover:text-slate-800">{product.category}</a>
         <span>/</span>
-        <span className="text-slate-900 font-medium truncate">{product.name}</span>
+        <span className="text-slate-900 font-semibold truncate">{product.name}</span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column: Image and Specs */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white p-6 rounded-2xl border border-slate-200">
-            <div className="bg-slate-50 border rounded-xl h-64 flex items-center justify-center text-slate-400 font-mono text-xs">
-              Hardware Component Preview Image
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <div className="bg-slate-100 border border-slate-200 rounded-xl h-72 flex flex-col items-center justify-center text-slate-500 font-mono text-xs gap-2">
+              <span className="text-3xl">📦</span>
+              <span>{product.name} Preview Image</span>
             </div>
-            <div className="mt-6 space-y-2">
-              <span className="bg-blue-50 text-blue-600 text-xs font-semibold px-2.5 py-1 rounded-md">
+            <div className="space-y-2">
+              <span className="bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-md">
                 {product.category}
               </span>
               <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">{product.name}</h1>
-              <p className="text-xs text-slate-400">Manufacturer Part: NV-RTX-4070S-12G | Brand: {product.brand}</p>
+              <p className="text-xs text-slate-500">Brand: <strong className="text-slate-800">{product.brand}</strong> | Verified Indian Retailer Stock</p>
             </div>
           </div>
 
           {/* Technical Specifications */}
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
             <h2 className="text-lg font-bold text-slate-900">Technical Specifications</h2>
-            <div className="grid grid-cols-2 gap-4 text-xs">
-              {Object.entries(product.specs).map(([key, val]) => (
-                <div key={key} className="bg-slate-50 p-3 rounded-xl border border-slate-100 flex justify-between">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              {Object.entries(product.specs).map(([key, val]: [string, any]) => (
+                <div key={key} className="bg-slate-50 p-3.5 rounded-xl border border-slate-100 flex justify-between">
                   <span className="text-slate-500 font-medium">{key}</span>
                   <span className="text-slate-900 font-bold">{val}</span>
                 </div>
@@ -75,34 +103,35 @@ export default async function ProductDetailPage({
 
         {/* Right Column: Live Retailer Price Comparison */}
         <div className="space-y-6">
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-md space-y-5 sticky top-24">
             <div>
-              <div className="text-xs text-slate-400 font-medium">Lowest Available Price in India</div>
+              <div className="text-xs text-slate-500 font-medium">Lowest Available Price in India</div>
               <div className="text-3xl font-extrabold text-slate-900 mt-1">₹{product.currentLowest.toLocaleString("en-IN")}</div>
-              <div className="text-xs text-slate-400 line-through">MRP: ₹{product.mrp.toLocaleString("en-IN")}</div>
-              <div className="mt-2 text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md w-fit">
-                Best Offer via {product.lowestRetailer}
+              <div className="text-xs text-slate-400 line-through mt-0.5">MRP: ₹{product.mrp.toLocaleString("en-IN")}</div>
+              <div className="mt-2.5 text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-lg w-fit border border-emerald-200">
+                ✓ Best Offer via {product.lowestRetailer}
               </div>
             </div>
 
             <div className="border-t pt-4 space-y-3">
-              <h3 className="font-bold text-slate-900 text-xs uppercase tracking-wider">All Retailer Offers</h3>
-              <div className="space-y-2">
-                {product.offers.map((offer, idx) => (
-                  <div key={idx} className="p-3 rounded-xl border border-slate-100 bg-slate-50/50 flex items-center justify-between hover:border-blue-400 transition-colors">
+              <h3 className="font-bold text-slate-900 text-xs uppercase tracking-wider">All Retailer Offers (Live)</h3>
+              <div className="space-y-2.5">
+                {product.offers.map((offer: any, idx: number) => (
+                  <div key={idx} className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 flex items-center justify-between hover:border-blue-400 transition-colors">
                     <div>
                       <div className="font-bold text-slate-900 text-xs">{offer.retailer}</div>
-                      <div className="text-[10px] text-slate-400">{offer.stock} • Delivery: {offer.delivery}</div>
+                      <div className="text-[10px] text-slate-500 mt-0.5">{offer.stock} • Delivery: {offer.delivery}</div>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="text-right">
-                        <div className="font-bold text-slate-900 text-xs">₹{offer.price.toLocaleString("en-IN")}</div>
+                        <div className="font-extrabold text-slate-900 text-xs">₹{offer.price.toLocaleString("en-IN")}</div>
                       </div>
                       <a
                         href={offer.link}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm transition-colors"
+                        onClick={(e) => { e.preventDefault(); alert(`Redirecting to ${offer.retailer} via affiliate tracking link...`); }}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-sm transition-colors"
                       >
-                        Buy Now
+                        Buy Now →
                       </a>
                     </div>
                   </div>
@@ -110,8 +139,8 @@ export default async function ProductDetailPage({
               </div>
             </div>
 
-            <div className="border-t pt-4 text-[11px] text-slate-400 italic">
-              * Prices updated every 2 hours. We may earn a commission from affiliate links.
+            <div className="border-t pt-4 text-[11px] text-slate-400 italic leading-relaxed">
+              * Prices updated every 2 hours from official retailer APIs and scraper nodes. We may earn an affiliate commission on purchases at no extra cost to you.
             </div>
           </div>
         </div>

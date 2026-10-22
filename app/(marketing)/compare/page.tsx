@@ -7,10 +7,10 @@ export default function ComparePage() {
 
   const gpus = [
     {
-      name: "NVIDIA GeForce RTX 4070 Super",
+      name: "RTX 4070 Super",
       vram: "12GB GDDR6X",
       tdp: "220W",
-      currentPrice: "₹64,999",
+      currentPrice: "₹62,999",
       retailer: "MDComputers",
       gaming1080p: "240+ FPS (Ultra)",
       gaming1440p: "142+ FPS (Ultra)",
@@ -19,10 +19,10 @@ export default function ComparePage() {
       recommendedPsu: "650W",
     },
     {
-      name: "AMD Radeon RX 7800 XT",
+      name: "RX 7800 XT",
       vram: "16GB GDDR6",
       tdp: "263W",
-      currentPrice: "₹51,499",
+      currentPrice: "₹48,999",
       retailer: "PrimeABGB",
       gaming1080p: "255+ FPS (Ultra)",
       gaming1440p: "148+ FPS (Ultra)",
@@ -31,10 +31,10 @@ export default function ComparePage() {
       recommendedPsu: "700W",
     },
     {
-      name: "NVIDIA GeForce RTX 4060",
+      name: "RTX 4060",
       vram: "8GB GDDR6",
       tdp: "115W",
-      currentPrice: "₹29,999",
+      currentPrice: "₹28,499",
       retailer: "Flipkart",
       gaming1080p: "160+ FPS (Ultra)",
       gaming1440p: "85+ FPS (High)",
@@ -46,33 +46,33 @@ export default function ComparePage() {
 
   const cpus = [
     {
-      name: "AMD Ryzen 7 7800X3D",
-      cores: "8 Cores / 16 Threads",
+      name: "Ryzen 7 7800X3D",
+      cores: "8C / 16T",
       socket: "AM5",
       currentPrice: "₹37,999",
       retailer: "PrimeABGB",
-      gamingPerf: "Crown King (Best Gaming CPU)",
+      gamingPerf: "Best Gaming CPU",
       tdp: "120W",
       ramSupport: "DDR5-5200+",
     },
     {
-      name: "Intel Core i5-14600K",
-      cores: "14 Cores (6P + 8E)",
+      name: "Core i5-14600K",
+      cores: "14C (6P+8E)",
       socket: "LGA1700",
-      currentPrice: "₹27,499",
-      retailer: "MDComputers",
-      gamingPerf: "Outstanding Value & Productivity",
+      currentPrice: "₹26,499",
+      retailer: "Flipkart",
+      gamingPerf: "Great Value",
       tdp: "181W (Max Turbo)",
       ramSupport: "DDR5 / DDR4",
     },
     {
-      name: "AMD Ryzen 5 7600X",
-      cores: "6 Cores / 12 Threads",
+      name: "Ryzen 5 7600",
+      cores: "6C / 12T",
       socket: "AM5",
-      currentPrice: "₹20,999",
-      retailer: "Vedant Computers",
-      gamingPerf: "Exceptional Entry AM5 Gaming",
-      tdp: "105W",
+      currentPrice: "₹18,999",
+      retailer: "MDComputers",
+      gamingPerf: "Best Entry AM5",
+      tdp: "65W",
       ramSupport: "DDR5-5200+",
     },
   ];
@@ -80,8 +80,8 @@ export default function ComparePage() {
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
       <div>
-        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">GPU & CPU Benchmark Comparison Matrix</h1>
-        <p className="text-slate-600 text-sm mt-1">Compare technical specifications, VRAM, power draw, and real gaming performance in INR across Indian stores.</p>
+        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">GPU &amp; CPU Benchmark Comparison</h1>
+        <p className="text-slate-600 text-sm mt-1">Compare specs, VRAM, power draw, and gaming performance with current Indian prices.</p>
       </div>
 
       <div className="flex gap-3">
@@ -91,7 +91,7 @@ export default function ComparePage() {
             tab === "gpu" ? "bg-blue-600 text-white shadow-md" : "bg-white text-slate-700 border hover:bg-slate-50"
           }`}
         >
-          🎮 Graphics Cards (GPU)
+          Graphics Cards (GPU)
         </button>
         <button
           onClick={() => setTab("cpu")}
@@ -99,7 +99,7 @@ export default function ComparePage() {
             tab === "cpu" ? "bg-blue-600 text-white shadow-md" : "bg-white text-slate-700 border hover:bg-slate-50"
           }`}
         >
-          ⚡ Processors (CPU)
+          Processors (CPU)
         </button>
       </div>
 

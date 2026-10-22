@@ -32,6 +32,32 @@ export default async function ProductDetailPage({
         { retailer: "Flipkart", price: 68999, stock: "2 Units Left", delivery: "Free", link: "#" },
       ],
     },
+    "msi-b650-tomahawk": {
+      name: "MSI MAG B650 TOMAHAWK WIFI Motherboard",
+      category: "Motherboards", brand: "MSI", mrp: 25999, currentLowest: 19999, lowestRetailer: "Vedant Computers",
+      specs: { "Socket": "AM5", "Form Factor": "ATX", "RAM": "DDR5", "PCIe": "5.0" },
+      offers: [
+        { retailer: "Vedant Computers", price: 19999, stock: "In Stock", delivery: "Free", link: "#" },
+        { retailer: "MDComputers", price: 20999, stock: "In Stock", delivery: "Free", link: "#" },
+      ],
+    },
+    "rtx-4060": {
+      name: "NVIDIA GeForce RTX 4060 8GB GDDR6",
+      category: "Graphics Cards", brand: "MSI / NVIDIA", mrp: 33999, currentLowest: 28499, lowestRetailer: "Flipkart",
+      specs: { "VRAM": "8GB GDDR6", "CUDA Cores": "3072", "TDP": "115W" },
+      offers: [
+        { retailer: "Flipkart", price: 28499, stock: "In Stock", delivery: "Free", link: "#" },
+        { retailer: "Amazon India", price: 29999, stock: "In Stock", delivery: "Free (Prime)", link: "#" },
+      ],
+    },
+    "ryzen-5-7600": {
+      name: "AMD Ryzen 5 7600 6-Core 12-Thread Processor",
+      category: "Processors (CPU)", brand: "AMD", mrp: 22999, currentLowest: 18999, lowestRetailer: "MDComputers",
+      specs: { "Cores / Threads": "6C / 12T", "Socket": "AM5", "TDP": "65W" },
+      offers: [
+        { retailer: "MDComputers", price: 18999, stock: "In Stock", delivery: "Free", link: "#" },
+      ],
+    },
     "ryzen-7-7800x3d": {
       name: "AMD Ryzen 7 7800X3D 8-Core 16-Thread Desktop Processor",
       category: "Processors (CPU)",
